@@ -1,8 +1,12 @@
+#NoEnv
 #SingleInstance Force
 Slp := 120 
 SetTitleMatchMode, regex
-  F1::return
+  #G::                        ; Opens Google Drive folder
+    Run, explore C:\Users\%A_UserName%\My Drive
+    return
 #IfWinActive Google Sheets ahk_exe firefox.exe
+  F1::return                  ; Disables F1 to open help
   !Down::Send ^!r             ; Excel filter dropdown shortcut for Sheets
   !Up::return                 ; Disable Sheets next sheet shortcut
   ^PgUp::Send !{Up}           ; Excel next sheet shortcut for Sheets
@@ -22,3 +26,5 @@ SetTitleMatchMode, regex
   Sleep Slp
   Send {Enter}
 return
+#IfWinActive Excel ahk_exe EXCEL.EXE
+  F1::return                  ; Disables F1 to open help
